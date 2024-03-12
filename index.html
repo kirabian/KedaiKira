@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jual App Premium</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 56px;
+    }
+
+    .app-card {
+      margin-bottom: 20px;
+      width: 100%; /* Lebar kartu diatur menjadi 100% */
+      height: 100%; /* Tinggi kartu diatur menjadi 100% */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-card img {
+      max-width: 100%;
+      height: auto;
+      flex-grow: 1; /* Bagian gambar dari kartu akan menyesuaikan tinggi kartu */
+    }
+
+    .search-result {
+      background-color: yellow;
+    }
+
+    /* Animasi pencarian */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .search-result {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Gaya slider */
+    #carouselExample {
+      position: relative;
+    }
+
+    .carousel-item-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Transparansi slider */
+    }
+
+    .carousel-item-overlay {
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+    }
+
+    /* Gaya untuk desktop */
+    @media (min-width: 768px) {
+      #carouselExample {
+        border: 5px solid #ddd; /* Border untuk slider di desktop */
+        border-radius: 10px;
+      }
+    }
+    .card-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Jumlah baris yang ingin ditampilkan */
+      -webkit-box-orient: vertical;
+    }
+
+    /* Gaya untuk perangkat mobile */
+    @media (max-width: 767px) {
+      .app-card {
+        max-width: 48%; /* Kartu akan memiliki lebar 48% dari lebar layar */
+        margin-bottom: 2%; /* Menambahkan sedikit margin bawah antara setiap kartu */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" id="allApps">All Aplikasi</a>
+        </li>
+      </ul>
+      <form class="form-inline ml-auto">
+        <input class="form-control mr-sm-2" type="search" placeholder="Cari aplikasi..." aria-label="Search"
+          id="searchInput">
+        <!-- Hapus tombol pencarian -->
+      </form>
+    </div>
+  </nav>
+
+  <!-- Carousel / Image Slider -->
+  <div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="slide1.png" class="d-block w-100" alt="Slider 1">
+        <div class="carousel-item-overlay">
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="path-to-image2.jpg" class="d-block w-100" alt="Slider 2">
+        <div class="carousel-item-overlay">
+          Slider 2 Text
+        </div>
+      </div>
+      <!-- Tambahkan slide lainnya sesuai kebutuhan -->
+    </div>
+  </div>
+
+  <!-- Konten -->
+  <div class="container mt-4">
+    <h2 class="mt-4">All Aplikasi</h2>
+    <div class="row" id="allAppsSection">
+      <!-- Card semua aplikasi di sini -->
+      <!-- Dapat diisi dengan aplikasi lainnya -->
+    </div>
+
+    <!-- Tombol Tampilkan Semua Aplikasi -->
+    <div class="row mt-4">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-primary" id="showAllApps">Tampilkan Semua Aplikasi</button>
+      </div>
+    </div>
+
+    <!-- Hasil Pencarian -->
+    <div class="row mt-4">
+      <div class="col-md-12 text-center">
+        <h3 id="searchResult" class="search-result d-none">Hasil Pencarian</h3>
+        <div id="searchResultContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Bootstrap JS dan JQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Script JavaScript untuk mengisi konten aplikasi -->
+  <script>
+    // Fungsi untuk membuat card aplikasi
+    function createAppCard(title, description, image) {
+      return `
+        <div class="col-md-3 app-card">
+          <div class="card">
+            <img src="${image}" class="card-img-top" alt="${title} Cover">
+            <div class="card-body">
+              <h5 class="card-title">${title}</h5>
+              <p class="card-text">${description}</p>
+              <a href="#" class="btn btn-primary">Beli</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Data semua aplikasi
+    const allAppsData = [
+      { title: 'Netflix', description: 'Deskripsi App 1', image: 'netfix.jpg' },
+      { title: 'Viu', description: 'Deskripsi App 2', image: 'viu.png' },
+      { title: 'Disney+', description: 'Deskripsi App 2', image: 'disney.png' },
+      { title: 'Amazon', description: 'Deskripsi App 2', image: 'amazon.png' },
+      // Tambahkan data aplikasi lainnya di sini
+    ];
+
+    // Mengisi konten semua aplikasi (awalnya hanya menampilkan 8 aplikasi)
+    const allAppsContainer = document.getElementById('allAppsSection');
+    const allAppsButton = document.getElementById('showAllApps');
+    allAppsData.slice(0, 8).forEach(app => {
+      allAppsContainer.innerHTML += createAppCard(app.title, app.description, app.image);
+    });
+
+    // Menambahkan event listener pada tombol "Tampilkan Semua Aplikasi"
+    allAppsButton.addEventListener('click', function () {
+      // Menghapus konten aplikasi yang sudah ada
+      allAppsContainer.innerHTML = '';
+
+      // Mengisi konten semua aplikasi
+      allAppsData.forEach(app => {
+        allAppsContainer.innerHTML += createAppCard(app.title, app.description, app.image);
+      });
+    });
+
+    // Fungsi untuk mencari aplikasi
+    function searchApps() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const searchResultContainer = document.getElementById('searchResult');
+      const searchResultContent = document.getElementById('searchResultContent');
+      const allAppsContainer = document.getElementById('allAppsSection');
+
+      // Menampilkan hasil pencarian
+      searchResultContainer.classList.add('search-result');
+      searchResultContainer.classList.remove('d-none');
+
+      // Menghapus konten hasil pencarian yang sudah ada
+      searchResultContent.innerHTML = '';
+
+      // Jika input pencarian kosong, kembali ke tampilan semua aplikasi
+      if (searchInput === '') {
+        searchResultContainer.classList.add('d-none');
+        allAppsContainer.classList.remove('d-none');
+        return;
+      }
+
+      // Mencari aplikasi yang sesuai dengan input
+      const searchResults = allAppsData.filter(app => app.title.toLowerCase().includes(searchInput));
+
+      // Menampilkan hasil pencarian
+      searchResults.forEach(app => {
+        searchResultContent.innerHTML += createAppCard(app.title, app.description, app.image);
+      });
+
+      // Menyembunyikan konten semua aplikasi
+      allAppsContainer.classList.add('d-none');
+    }
+
+    // Menambahkan event listener pada input pencarian
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', searchApps);
+  </script>
+
+</body>
+
+</html>
